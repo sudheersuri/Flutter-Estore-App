@@ -1,0 +1,33 @@
+name: practice
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_animate: ^4.5.0
+  http: ^1.2.2
+  flutter_bloc: ^8.1.6
+  flutter_riverpod: ^2.5.1
+  badges: ^3.1.2
+  shimmer: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  custom_lint: ^0.6.7
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/nodata.json
+    - assets/emptycart.json
+    - assets/nosearchfound.json
+    - assets/categories.json
+    - assets/products.json
