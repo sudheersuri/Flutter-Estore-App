@@ -93,7 +93,7 @@ class _CategoriesListState extends ConsumerState<CategoriesList> {
                   ],
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.only(left: 8.0),

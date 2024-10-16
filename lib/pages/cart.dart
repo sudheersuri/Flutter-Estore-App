@@ -23,17 +23,7 @@ class _CartState extends ConsumerState<Cart> {
       appBar: AppBar(
         title: const Text('Cart',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.white,
-        actions: [
-          CircularIconButton(
-            onPressed: () {
-              // Logic to clear cart
-            },
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            icon: const Icon(Icons.more_horiz),
-          ),
-          const SizedBox(width: 10),
-        ],
+        backgroundColor: Colors.white
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -91,7 +81,7 @@ class _CartState extends ConsumerState<Cart> {
                   // Checkout button at the bottom
                   !cartItems.isEmpty
                       ? Container(
-                          padding: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             boxShadow: [

@@ -41,7 +41,6 @@ class _HomeState extends State<Home> {
                   height: 170,
                   child: CategoriesList()
                 ),
-                SizedBox(height: 5),
                 // Products List (Vertical)
                 Expanded(
                   child: ProductsList(), 
@@ -113,12 +112,11 @@ class SearchBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
-                    Icon(Icons.search, color: Colors.grey),
+                    Icon(Icons.search),
                     SizedBox(width: 10),
                     Text(
-                      'Search the entire shop',
+                      'Search products ...',
                       style: TextStyle(
-                        color: Colors.grey,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -137,7 +135,7 @@ class SearchBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: IconButton(onPressed: () {
-            }, icon: const Icon(Icons.tune, color: Colors.grey)),
+            }, icon: const Icon(Icons.tune)),
           ),
           const SizedBox(width: 10),
            Container(
@@ -148,7 +146,7 @@ class SearchBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: IconButton(onPressed: () {
-            }, icon: const Icon(Icons.notifications, color: Colors.grey)),
+            }, icon: const Icon(Icons.notifications)),
           )
         ],
       ),

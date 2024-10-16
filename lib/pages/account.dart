@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Account extends ConsumerStatefulWidget {
+class Account extends StatefulWidget {
   const Account({super.key});
 
   @override
-  ConsumerState<Account> createState() => _AccountState();
+  State<Account> createState() => _AccountState();
 }
 
-class _AccountState extends ConsumerState<Account> {
+class _AccountState extends State<Account> {
+  String searchQuery = ''; // To store the search query
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: const Text('Account Settings', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Account Settings',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -29,63 +33,73 @@ class _AccountState extends ConsumerState<Account> {
                   hintText: "Search for a setting...",
                   filled: true,
                   fillColor: Colors.grey[200],
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
                   ),
                 ),
+                onChanged: (value) {
+                  // Update search query and refresh UI
+                  setState(() {
+                    searchQuery = value;
+                  });
+                },
               ),
             ),
             const Divider(height: 0.5),
-            ..._getSettings(context),
+            ..._getFilteredSettings(),
           ],
         ),
       ),
     );
   }
 
-  List<ListTile> _getSettings(BuildContext context) {
+  // Filter settings based on the search query
+  List<ListTile> _getFilteredSettings() {
     List<Map<String, dynamic>> settingsOptions = [
-        {
-          "icon": Icons.person_outline,
-          "title": "Account",
-        },
-        {
-          "icon": Icons.notifications_outlined,
-          "title": "Notifications",
-        },
-        {
-          "icon": Icons.visibility_outlined,
-          "title": "Appearance",
-        },
-        {
-          "icon": Icons.lock_outline,
-          "title": "Privacy & Security",
-        },
-        {
-          "icon": Icons.headset_mic_outlined,
-          "title": "Help and Support",
-        },
-        {
-          "icon": Icons.info_outline,
-          "title": "About",
-        },
+      {
+        "icon": Icons.person_outline,
+        "title": "Account",
+      },
+      {
+        "icon": Icons.notifications_outlined,
+        "title": "Notifications",
+      },
+      {
+        "icon": Icons.visibility_outlined,
+        "title": "Appearance",
+      },
+      {
+        "icon": Icons.lock_outline,
+        "title": "Privacy & Security",
+      },
+      {
+        "icon": Icons.headset_mic_outlined,
+        "title": "Help and Support",
+      },
+      {
+        "icon": Icons.info_outline,
+        "title": "About",
+      },
     ];
 
-    List<ListTile> settings = [];
-    for (var setting in settingsOptions) {
-      settings.add(
-        ListTile(
-      leading: Icon(setting["icon"]),
-      title: Text(setting["title"]),
-      trailing: Icon(Icons.chevron_right),
-      onTap: () {
-        // Navigate to corresponding settings page
-      },
-    )
+    // Filter settings based on search query
+    List<Map<String, dynamic>> filteredOptions = settingsOptions
+        .where((setting) =>
+            setting["title"].toLowerCase().contains(searchQuery.toLowerCase()))
+        .toList();
+
+    // Build ListTiles from filtered settings
+    return filteredOptions.map((setting) {
+      return ListTile(
+        leading: Icon(setting["icon"]),
+        title: Text(setting["title"]),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () {
+          // Navigate to corresponding settings page
+        },
       );
-    }
-    return settings;
+    }).toList();
   }
 }
