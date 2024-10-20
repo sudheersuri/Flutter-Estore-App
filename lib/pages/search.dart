@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/pages/product_detail.dart';
 import 'package:practice/providers/global_state.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Search extends ConsumerStatefulWidget {
   const Search({super.key});
@@ -87,12 +89,26 @@ class _SearchState extends ConsumerState<Search> {
                                     borderRadius: BorderRadius.circular(8),
                                     child: Container(
                                       color: secondaryColor,
-                                      child: Image.network(
-                                        filteredProducts[index]['images'][0],
-                                        height: 150,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: CachedNetworkImage(
+                                            imageUrl: filteredProducts[index]['thumbnail'],
+                                            placeholder: (context, url) => Shimmer.fromColors(
+                                                baseColor: Colors.grey.shade300,
+                                                highlightColor: Colors.grey.shade100,
+                                                child: Container(
+                                                  color: Colors.white,
+                                                )
+                                            ),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              height: 150,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                        ),
                                     ),
                                   ),
                                 ),

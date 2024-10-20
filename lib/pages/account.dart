@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice/pages/addresses.dart';
+import 'package:practice/pages/profile.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -71,8 +73,8 @@ class _AccountState extends State<Account> {
         "title": "Appearance",
       },
       {
-        "icon": Icons.lock_outline,
-        "title": "Privacy & Security",
+        "icon": Icons.home_outlined,
+        "title": "Addresses",
       },
       {
         "icon": Icons.headset_mic_outlined,
@@ -97,7 +99,20 @@ class _AccountState extends State<Account> {
         title: Text(setting["title"]),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
-          // Navigate to corresponding settings page
+          if(setting["title"] == "Account") {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Profile(),
+              ),
+            );
+          }
+          else if(setting["title"] == "Addresses") {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Addresses(),
+              ),
+            );
+          }
         },
       );
     }).toList();

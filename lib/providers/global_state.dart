@@ -8,6 +8,8 @@ final cartItemsProvider = StateProvider<dynamic>((_)=>[]);
 
 final favoritesProvider = StateProvider<dynamic>((_)=>[]);
 
+final loggedInProvider = StateProvider<dynamic>((_)=> false);
+
 updateState(ref,targeProvider,newState) {
   ref.read(targeProvider.notifier).update((state) => newState);
 }

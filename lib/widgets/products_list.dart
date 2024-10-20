@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/pages/flash_sale_products.dart';
@@ -7,6 +8,7 @@ import 'package:practice/providers/global_state.dart';
 import 'package:practice/widgets/circular_icon_btn.dart';
 import 'package:practice/widgets/product_item_loader.dart';
 import 'package:flutter/services.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductsList extends ConsumerStatefulWidget {
   const ProductsList({super.key});
@@ -37,7 +39,7 @@ class _ProductsListState extends ConsumerState<ProductsList> {
     //       ref,
     //       productsProvider,
     //       (json.decode(response.body)['products'] as List)
-    //           .where((product) => !product['images'][0].contains('placeimg'))
+    //           .where((product) => !product['images'][0].contains('placeimg') || !product['thumbnail'].contains('placeimg'))
     //           .toList());
     // } else {
     //   throw Exception('Failed to load products');
@@ -101,7 +103,7 @@ class _ProductsListState extends ConsumerState<ProductsList> {
                   itemBuilder: (context, index) {
                     final product = products[index];
                     // Directly use the image property from the API response
-                    String imageUrl = product['images'][0];
+                    String imageUrl = product['thumbnail'];
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Column(
@@ -125,11 +127,25 @@ class _ProductsListState extends ConsumerState<ProductsList> {
                                     height: 185,
                                     color:
                                         Theme.of(context).colorScheme.secondary,
-                                    child: Image.network(
-                                      imageUrl,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
+                                    child: CachedNetworkImage(
+                                            imageUrl: imageUrl,
+                                            placeholder: (context, url) => Shimmer.fromColors(
+                                                baseColor: Colors.grey.shade300,
+                                                highlightColor: Colors.grey.shade100,
+                                                child: Container(
+                                                  color: Colors.white,
+                                                )
+                                            ),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                        ),
                                   ),
                                 ),
                                 Positioned(

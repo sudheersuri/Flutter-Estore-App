@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/models/cart.dart';
 import 'package:practice/providers/global_state.dart';
 import 'package:practice/widgets/circular_icon_btn.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CartItemsList extends ConsumerStatefulWidget {
   const CartItemsList({super.key});
@@ -27,8 +29,27 @@ class _CartItemsListState extends ConsumerState<CartItemsList> {
                         return ListTile(
                           leading: Container(
                             color: Theme.of(context).colorScheme.secondary,
-                            child: Image.network(product['images'][0],
-                                width: 60, height: 200),
+                            child: CachedNetworkImage(
+                                            imageUrl: product['thumbnail'],
+                                            placeholder: (context, url) => Shimmer.fromColors(
+                                                baseColor: Colors.grey.shade300,
+                                                highlightColor: Colors.grey.shade100,
+                                                child: Container(
+                                                  color: Colors.white,
+                                                )
+                                            ),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              width: 60,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                        ),
                           ),
                           title: Text(product['title']),
                           subtitle:

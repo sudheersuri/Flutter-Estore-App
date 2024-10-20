@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/pages/product_detail.dart';
 import 'package:practice/providers/global_state.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class Favorites extends ConsumerStatefulWidget {
@@ -59,7 +61,7 @@ class _FavoritesState extends ConsumerState<Favorites> {
                           itemBuilder: (context, index) {
                             final product = favoriteProducts[index];
                             // Directly use the image property from the API response
-                            String imageUrl = product['images'][0];
+                            String imageUrl = product['thumbnail'];
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Column(
@@ -79,19 +81,30 @@ class _FavoritesState extends ConsumerState<Favorites> {
                                         Hero(
                                           tag: product[
                                               'id'], // Unique tag for each product
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            child: Container(
-                                              color: Theme.of(context).colorScheme.secondary,
-                                              child: Image.network(
-                                                imageUrl,
-                                                height: 180 ,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
+                                          child: Container(
+                                          height: 185,
+                                          color:
+                                              Theme.of(context).colorScheme.secondary,
+                                          child: CachedNetworkImage(
+                                                  imageUrl: imageUrl,
+                                                  placeholder: (context, url) => Shimmer.fromColors(
+                                                      baseColor: Colors.grey.shade300,
+                                                      highlightColor: Colors.grey.shade100,
+                                                      child: Container(
+                                                        color: Colors.white,
+                                                      )
+                                                  ),
+                                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                                  imageBuilder: (context, imageProvider) => Container(
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
                                               ),
-                                            ),
-                                          ),
+                                        ),
                                         ),
                                         Positioned(
                                           top: 10,

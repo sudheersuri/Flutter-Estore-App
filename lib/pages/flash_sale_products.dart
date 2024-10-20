@@ -41,7 +41,7 @@ class _FlashSaleProductsState extends ConsumerState<FlashSaleProducts> {
                   itemBuilder: (context, index) {
                     final product = products[index];
                     // Directly use the image property from the API response
-                    String imageUrl = product['images'][0];
+                    String imageUrl = product['thumbnail'];
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Column(

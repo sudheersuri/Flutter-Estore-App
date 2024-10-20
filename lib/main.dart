@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:practice/pages/login.dart';
 import 'package:practice/pages/search.dart';
 import 'package:practice/pages/account.dart';
+import 'package:practice/providers/global_state.dart';
 import 'package:practice/widgets/cart_icon_with_badge.dart';
 import 'package:practice/pages/favorites.dart';
 import 'package:practice/pages/home.dart';
@@ -37,17 +39,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
+  
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   int _selectedIndex = 0;
+
   static const List<Widget> _pages = <Widget>[
     Home(),
     Search(),
@@ -57,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   @override
   Widget build(BuildContext context) {
+  final isLoggedIn = ref.watch(loggedInProvider);
+    if (!isLoggedIn) {
+        return Login();
+    }
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
