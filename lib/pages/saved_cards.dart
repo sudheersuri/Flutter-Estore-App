@@ -1,55 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:practice/pages/add_edit_address.dart';
+import 'package:practice/pages/add_edit_card.dart';
 
-class Addresses extends StatefulWidget {
-  const Addresses({super.key});
+class SavedCards extends StatefulWidget {
+  const SavedCards({super.key});
 
   @override
-  State<Addresses> createState() => _AddressesState();
+  State<SavedCards> createState() => _SavedCardsState();
 }
 
-class _AddressesState extends State<Addresses> {
-  final addresses = [
+class _SavedCardsState extends State<SavedCards> {
+  final cards = [
     {
       'id': 1,
-      'name': 'Home',
-      'address': '1234 Elm St.',
-      'city': 'Springfield',
-      'state': 'IL',
-      'zip': '62701',
+      'name': 'XXXX-XXXX-XXXX-1234',
+      'expiry': '12/23',
+      'type': 'Visa',
     },
     {
       'id': 2,
-      'name': 'Work',
-      'address': '5678 Oak St.',
-      'city': 'Springfield',
-      'state': 'IL',
-      'zip': '62701',
+      'name': 'XXXX-XXXX-XXXX-5678',
+      'expiry': '12/24',
+      'type': 'Mastercard',
     },
     {
       'id': 3,
-      'name': 'Grandma\'s',
-      'address': '9101 Pine St.',
-      'city': 'Springfield',
-      'state': 'IL',
-      'zip': '62701',
+      'name': 'XXXX-XXXX-XXXX-9101',
+      'expiry': '12/25',
+      'type': 'American Express',
     },
     {
       'id': 4,
-      'name': 'School',
-      'address': '1122 Maple St.',
-      'city': 'Springfield',
-      'state': 'IL',
-      'zip': '62701',
+      'name': 'XXXX-XXXX-XXXX-1122',
+      'expiry': '12/26',
+      'type': 'Discover',
     }
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(  
       appBar: AppBar(
-        scrolledUnderElevation: 0,
         titleSpacing: 2,
-        title: Text('Addresses'),
+        title: Text('Saved cards'),
         actions: [
           TextButton(
             onPressed: () {
@@ -57,14 +49,11 @@ class _AddressesState extends State<Addresses> {
               //material page route
               //updateState(ref, loggedInProvider, !isLoggedin);
               //material navigation to login
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEditAddress()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEditCard()));
             },
-            child: Padding(
-              padding: const EdgeInsets.only(right:8.0),
-              child: Text(
-                'Add',
-                style: TextStyle(color: Colors.black),
-              ),
+            child: Text(
+              'Add',
+              style: TextStyle(color: Colors.black),
             ),
           ),
         ],
@@ -80,9 +69,9 @@ class _AddressesState extends State<Addresses> {
             children: [
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: addresses.length,
+                itemCount: cards.length,
                 itemBuilder: (context, index) {
-                  final address = addresses[index];
+                  final address = cards[index];
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -108,12 +97,12 @@ class _AddressesState extends State<Addresses> {
                           },
                         ),
                       ),
-                      subtitle: Text('${address['address']}\n${address['city']}, ${address['state']} ${address['zip']}'),
+                      subtitle: Text('${address['type']}\n${address['expiry']}'),
                       trailing: IconButton(
                         icon: Icon(Icons.edit, size: 16, color: Colors.grey),
                         onPressed: () {
                           
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEditAddress(address: address)));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddEditCard(card: address)));
                         },
                       ),
                     ),
@@ -135,7 +124,7 @@ class _AddressesState extends State<Addresses> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: const Text('Confirm address'),
+                child: const Text('Update default card'),
               ),
             ],
           ),

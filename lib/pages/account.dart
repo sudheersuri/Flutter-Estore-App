@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:practice/pages/addresses.dart';
+import 'package:practice/pages/orders.dart';
 import 'package:practice/pages/profile.dart';
+import 'package:practice/pages/saved_cards.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -65,16 +67,16 @@ class _AccountState extends State<Account> {
         "title": "Account",
       },
       {
-        "icon": Icons.notifications_outlined,
-        "title": "Notifications",
-      },
-      {
-        "icon": Icons.visibility_outlined,
-        "title": "Appearance",
-      },
-      {
         "icon": Icons.home_outlined,
         "title": "Addresses",
+      },
+      {
+        "icon": Icons.file_copy_outlined,
+        "title": "Order history",
+      },
+       {
+        "icon": Icons.payment_outlined,
+        "title": "Saved cards",
       },
       {
         "icon": Icons.headset_mic_outlined,
@@ -110,6 +112,21 @@ class _AccountState extends State<Account> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Addresses(),
+              ),
+            );
+          }
+          else if(setting["title"] == "Order history") {
+            // Navigate to Order history page
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Orders(),
+              ),
+            );
+          }
+          else if(setting["title"] == "Saved cards") {
+             Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SavedCards(),
               ),
             );
           }

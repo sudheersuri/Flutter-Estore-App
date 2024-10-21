@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,21 +7,21 @@ import 'package:practice/pages/product_detail.dart';
 import 'package:practice/providers/global_state.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Search extends ConsumerStatefulWidget {
-  const Search({super.key});
+class Orders extends ConsumerStatefulWidget {
+  const Orders({super.key});
 
   @override
-  ConsumerState<Search> createState() => _SearchState();
+  ConsumerState<Orders> createState() => _OrdersState();
 }
 
-class _SearchState extends ConsumerState<Search> {
-  String _searchText = '';
+final randomDeliveryStatus = ['Delivered on January 1st', 'Shipped', 'Cancelled on Jan 2nd','Pending'];
+class _OrdersState extends ConsumerState<Orders> {
+   String _searchText = '';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     Color secondaryColor = const Color(0xFFF0F1F2);
@@ -31,8 +33,9 @@ class _SearchState extends ConsumerState<Search> {
           .toList();
     return Scaffold(
        appBar: AppBar(
+        titleSpacing: 2,
         scrolledUnderElevation: 0,
-        title: const Text('Search ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text('Order History', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -49,7 +52,7 @@ class _SearchState extends ConsumerState<Search> {
                   })
                 },
                 decoration: InputDecoration(
-                  hintText: "Search products",
+                  hintText: "Search products from orders",
                   filled: true,
                   fillColor: Colors.grey[200],
                   prefixIcon: Icon(Icons.search),
@@ -99,7 +102,7 @@ class _SearchState extends ConsumerState<Search> {
                                             ),
                                             errorWidget: (context, url, error) => Icon(Icons.error),
                                             imageBuilder: (context, imageProvider) => Container(
-                                              height: 150,
+                                              
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                     image: imageProvider,
@@ -113,7 +116,9 @@ class _SearchState extends ConsumerState<Search> {
                                 ),
                               ),
                               title: Text(filteredProducts[index]['title']),
-                              subtitle: Text(filteredProducts[index]['description'], style: TextStyle(color: Colors.grey, fontSize: 12),
+                              subtitle: Text(//randomly select delivery status
+                                  randomDeliveryStatus[Random().nextInt(randomDeliveryStatus.length)],
+                              style: TextStyle(color: Colors.grey, fontSize: 12),
                                   maxLines: 2),
                               trailing: Text('\$${filteredProducts[index]['price']}'),
                             ),

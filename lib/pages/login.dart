@@ -20,6 +20,7 @@ class _LoginState extends ConsumerState<Login> {
     }
     return Scaffold(  
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(''),
         actions: [
           TextButton(

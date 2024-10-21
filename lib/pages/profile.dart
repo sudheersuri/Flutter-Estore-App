@@ -18,7 +18,22 @@ class _nameState extends ConsumerState<Profile> {
 
     return Scaffold(  
       appBar: AppBar(
-        title: Text('Profile'),
+        titleSpacing: 2,
+        scrolledUnderElevation: 0,
+        //title: Text('Profile'),
+        automaticallyImplyLeading: false, // Don't show the leading button
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+               onPressed: () => Navigator.pop(context),
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+            ),
+            Text('Profile', style: TextStyle(color: Colors.black)),
+            // Your widgets here
+          ],
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -28,9 +43,12 @@ class _nameState extends ConsumerState<Profile> {
               //material navigation to login
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => Login()));
             },
-            child: Text(
-              'Logout',
-              style: TextStyle(color: Colors.red),
+            child: Padding(
+              padding: const EdgeInsets.only(right:8.0),
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ),
         ],
@@ -133,6 +151,8 @@ class _nameState extends ConsumerState<Profile> {
                   onPressed: () {
                     // Handle login logic
                     //updateState(ref, loggedInProvider, !isLoggedIn);
+                    //go back 
+                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),

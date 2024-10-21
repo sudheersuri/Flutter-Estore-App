@@ -21,6 +21,7 @@ class _CartState extends ConsumerState<Cart> {
 
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: const Text('Cart',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white

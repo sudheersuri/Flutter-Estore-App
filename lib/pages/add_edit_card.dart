@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/providers/global_state.dart';
 
-class AddEditAddress extends ConsumerStatefulWidget {
-  final Map<String, Object>? address;
-  const AddEditAddress({super.key, this.address});
+class AddEditCard extends ConsumerStatefulWidget {
+  final Map<String, Object>? card;
+  const AddEditCard({super.key, this.card});
 
   @override
-  ConsumerState<AddEditAddress> createState() => _AddEditAddressState();
+  ConsumerState<AddEditCard> createState() => _AddEditCardState();
 }
 
-class _AddEditAddressState extends ConsumerState<AddEditAddress> {
+class _AddEditCardState extends ConsumerState<AddEditCard> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _stateController = TextEditingController();
-  final TextEditingController _zipController = TextEditingController();
+  final TextEditingController _expiryController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    if (widget.address != null) {
-      _nameController.text = widget.address?['name'] as String? ?? '';
-      _addressController.text = widget.address?['address'] as String? ?? '';
-      _cityController.text = widget.address?['city'] as String? ?? '';
-      _stateController.text = widget.address?['state'] as String? ?? '';
-      _zipController.text = widget.address?['zip'] as String? ?? '';
+    if (widget.card != null) {
+      _nameController.text = widget.card?['name'] as String? ?? '';
+      _expiryController.text = widget.card?['expiry'] as String? ?? '';
+      _typeController.text = widget.card?['type'] as String? ?? '';
     }
   }
 
@@ -36,14 +32,13 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
       appBar: AppBar(
         titleSpacing: 2,
         scrolledUnderElevation: 0,
-        title: Text(
-            widget.address?['id'] != null ? 'Edit Address' : 'Add Address'),
+        title: Text(widget.card?['id'] != null ? 'Edit Card' : 'Add Card'),
       ),
-     body: Container(
-       height: MediaQuery.of(context).size.height,
-       color:  Colors.white,
-       child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0), // Adds padding to avoid overlap
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        color: Colors.white,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -51,7 +46,7 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
               TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'Full Name',
+                  labelText: 'Card Number',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: const BorderSide(
@@ -77,9 +72,9 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: _addressController,
+                controller: _expiryController,
                 decoration: InputDecoration(
-                  labelText: 'Address',
+                  labelText: 'Expiry Date (MM/YY)',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: const BorderSide(
@@ -105,9 +100,9 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: _cityController,
+                controller: _typeController,
                 decoration: InputDecoration(
-                  labelText: 'City',
+                  labelText: 'Card Type (e.g., Visa, Mastercard)',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: const BorderSide(
@@ -132,74 +127,13 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                controller: _stateController,
-                decoration: InputDecoration(
-                  labelText: 'State',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.blue,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _zipController,
-                decoration: InputDecoration(
-                  labelText: 'ZIP Code',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: const BorderSide(
-                      color: Colors.blue,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-             // Ensure button is always at the bottom
               Padding(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Name: ${_nameController.text}');
-                    print('Address: ${_addressController.text}');
-                    print('City: ${_cityController.text}');
-                    print('State: ${_stateController.text}');
-                    print('ZIP: ${_zipController.text}');
-                    //go back
-                    Navigator.pop(context);
+                    print('Card Number: ${_nameController.text}');
+                    print('Expiry Date: ${_expiryController.text}');
+                    print('Card Type: ${_typeController.text}');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -209,23 +143,22 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: const Text('Update Address'),
+                  child: const Text('Update Card'),
                 ),
               ),
               const SizedBox(height: 16),
             ],
           ),
         ),
-     ), );
+      ),
+    );
   }
 
   @override
   void dispose() {
     _nameController.dispose();
-    _addressController.dispose();
-    _cityController.dispose();
-    _stateController.dispose();
-    _zipController.dispose();
+    _expiryController.dispose();
+    _typeController.dispose();
     super.dispose();
   }
 }
