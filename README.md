@@ -31,3 +31,4 @@ Video demo:
 - ✅ Profile Update
 - ✅ Saved addresses
 - ✅ Saved cards
+- ✅ Order history
