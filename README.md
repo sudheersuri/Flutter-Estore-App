@@ -9,8 +9,8 @@ Flutter Ecommerce App
 ![Third](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/third.png)
 ![Fourth](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/four.png)
 
-Video demo:
 
+Watch the app in action! Check out the video demo [https://youtu.be/cM2RsWDpxmM?si=gQJPSTPn4AAfxUjW](https://youtu.be/cM2RsWDpxmM?si=gQJPSTPn4AAfxUjW).
 
 ✨ Screens:
 - ✅ Login & Signup
