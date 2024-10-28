@@ -6,7 +6,6 @@ Flutter Ecommerce App
 
 ![Firs](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/first.png)
 ![Second](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/second.png)
-![Third](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/third.png)
 ![Fourth](https://github.com/sudheersuri/Flutter-Estore-App/blob/main/screenshots/four.png)
 
 
