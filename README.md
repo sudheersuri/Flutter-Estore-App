@@ -1,4 +1,4 @@
-# practice
+# Free Ecommerce app with flutter
 
 A new Flutter project.
 
