@@ -51,7 +51,7 @@ class _CartState extends ConsumerState<Cart> {
                                 color: Colors.grey),
                             SizedBox(width: 8),
                             Text(
-                              '92 High Street, London',
+                              '125 Sans street, Hyderabad, India',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],

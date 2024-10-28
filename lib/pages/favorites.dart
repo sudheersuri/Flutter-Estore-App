@@ -25,7 +25,7 @@ class _FavoritesState extends ConsumerState<Favorites> {
     final products = ref.watch(productsProvider);
     final favorites = ref.watch(favoritesProvider);
     var size = MediaQuery.of(context).size;
-    var childAspectRatio = size.width / (size.height * 0.68);
+    var childAspectRatio = size.width / (size.height * 0.75);
     final favoriteProducts = favorites.length != 0 ? products.where((product) => favorites.contains(product['id'] as int) as bool).toList(): [];
     return Scaffold(
       appBar: AppBar(

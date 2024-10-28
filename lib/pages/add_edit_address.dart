@@ -193,12 +193,6 @@ class _AddEditAddressState extends ConsumerState<AddEditAddress> {
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Name: ${_nameController.text}');
-                    print('Address: ${_addressController.text}');
-                    print('City: ${_cityController.text}');
-                    print('State: ${_stateController.text}');
-                    print('ZIP: ${_zipController.text}');
-                    //go back
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(

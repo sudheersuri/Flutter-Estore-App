@@ -92,7 +92,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Catalog',
+            label: 'Search',
             activeIcon: (Icon(Icons.search, color: Colors.black)),
           ),
           BottomNavigationBarItem(

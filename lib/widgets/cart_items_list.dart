@@ -27,88 +27,94 @@ class _CartItemsListState extends ConsumerState<CartItemsList> {
                         final product =
                             products.firstWhere((p) => p['id'] == c.id);
                         return ListTile(
-                          leading: Container(
-                            color: Theme.of(context).colorScheme.secondary,
-                            child: CachedNetworkImage(
-                                            imageUrl: product['thumbnail'],
-                                            placeholder: (context, url) => Shimmer.fromColors(
-                                                baseColor: Colors.grey.shade300,
-                                                highlightColor: Colors.grey.shade100,
-                                                child: Container(
-                                                  color: Colors.white,
-                                                )
-                                            ),
-                                            errorWidget: (context, url, error) => Icon(Icons.error),
-                                            imageBuilder: (context, imageProvider) => Container(
-                                              width: 60,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
+                          leading:  SizedBox(
+                            width: 60,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Container(
+                                color: Theme.of(context).colorScheme.secondary,
+                                child: CachedNetworkImage(
+                                              imageUrl: product['thumbnail'],
+                                              placeholder: (context, url) => Shimmer.fromColors(
+                                                  baseColor: Colors.grey.shade300,
+                                                  highlightColor: Colors.grey.shade100,
+                                                  child: Container(
+                                                    color: Colors.white,
+                                                  )
+                                              ),
+                                              errorWidget: (context, url, error) => Icon(Icons.error),
+                                              imageBuilder: (context, imageProvider) => Container(
+                                                width: 60,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                        ),
+                                          ),
+                              ),
+                            ),
                           ),
-                          title: Text(product['title']),
-                          subtitle:
-                              Text('\$${product['price'].toStringAsFixed(2)}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CircularIconButton(
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.secondary,
-                                icon: const Icon(Icons.remove),
-                                iconSize: 12,
-                                onPressed: () {
-                                  if (cartItems.length == 0) {
-                                    return;
-                                  }
-                                  final List<CartItem> newCartItems =
-                                      List<CartItem>.from(cartItems);
-                                  //reduce by 1 if qty is greater than 1
-                                  if (c.qty > 1) {
-                                    newCartItems
-                                        .firstWhere(
-                                            (element) => element.id == c.id)
-                                        .qty -= 1;
-                                  } else {
-                                    newCartItems.removeWhere(
-                                        (element) => element.id == c.id);
-                                  }
-                                  updateState(
-                                      ref, cartItemsProvider, newCartItems);
-                                },
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(c.qty.toString()),
-                              ),
-                              CircularIconButton(
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.secondary,
-                                icon: const Icon(Icons.add),
-                                iconSize: 12,
-                                onPressed: () {
-                                  if (cartItems.length == 0) {
-                                    return;
-                                  }
-                                  final List<CartItem> newCartItems =
-                                      List<CartItem>.from(cartItems);
+                                                          title: Text(product['title']),
+                                                          subtitle:
+                                                              Text('\$${product['price'].toStringAsFixed(2)}'),
+                                                          trailing: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              CircularIconButton(
+                                                                backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                                                                icon: const Icon(Icons.remove),
+                                                                iconSize: 12,
+                                                                onPressed: () {
+                                if (cartItems.length == 0) {
+                                  return;
+                                }
+                                final List<CartItem> newCartItems =
+                                    List<CartItem>.from(cartItems);
+                                //reduce by 1 if qty is greater than 1
+                                if (c.qty > 1) {
                                   newCartItems
                                       .firstWhere(
                                           (element) => element.id == c.id)
-                                      .qty += 1;
-                                  updateState(
-                                      ref, cartItemsProvider, newCartItems);
-                                },
-                              ),
-                            ],
-                          ),
-                        );
+                                      .qty -= 1;
+                                } else {
+                                  newCartItems.removeWhere(
+                                      (element) => element.id == c.id);
+                                }
+                                updateState(
+                                    ref, cartItemsProvider, newCartItems);
+                                                                },
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                                                                child: Text(c.qty.toString()),
+                                                              ),
+                                                              CircularIconButton(
+                                                                backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                                                                icon: const Icon(Icons.add),
+                                                                iconSize: 12,
+                                                                onPressed: () {
+                                if (cartItems.length == 0) {
+                                  return;
+                                }
+                                final List<CartItem> newCartItems =
+                                    List<CartItem>.from(cartItems);
+                                newCartItems
+                                    .firstWhere(
+                                        (element) => element.id == c.id)
+                                    .qty += 1;
+                                updateState(
+                                    ref, cartItemsProvider, newCartItems);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
                       }).toList(),
                     ],
                   ));

@@ -131,10 +131,7 @@ class _AddEditCardState extends ConsumerState<AddEditCard> {
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Card Number: ${_nameController.text}');
-                    print('Expiry Date: ${_expiryController.text}');
-                    print('Card Type: ${_typeController.text}');
-                  },
+                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.black,

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "change",
+    "name": "Shirts",
     "image": "https://i.imgur.com/QkIa5tT.jpeg",
     "creationAt": "2024-10-13T21:57:58.000Z",
     "updatedAt": "2024-10-14T01:49:27.000Z"
@@ -15,7 +15,7 @@
   },
   {
     "id": 3,
-    "name": "test-name",
+    "name": "Portraits",
     "image": "https://i.imgur.com/Qphac99.jpeg",
     "creationAt": "2024-10-13T21:57:58.000Z",
     "updatedAt": "2024-10-14T11:49:25.000Z"
@@ -29,21 +29,21 @@
   },
   {
     "id": 5,
-    "name": "new category",
+    "name": "Bicycles",
     "image": "https://i.imgur.com/BG8J0Fj.jpg",
     "creationAt": "2024-10-13T21:57:58.000Z",
     "updatedAt": "2024-10-14T06:36:58.000Z"
   },
   {
     "id": 40,
-    "name": "string",
+    "name": "Shampoo",
     "image": "https://i.imgur.com/QkIa5tT.jpeg",
     "creationAt": "2024-10-14T07:19:38.000Z",
     "updatedAt": "2024-10-14T07:19:38.000Z"
   },
   {
     "id": 50,
-    "name": "Shampoo",
+    "name": "Cosmetics",
     "image": "https://clmensstore.com/wp-content/uploads/2024/01/dau-goi-the-original-hair-shampoo-brightness-50-copy-scaled.jpg",
     "creationAt": "2024-10-14T09:49:05.000Z",
     "updatedAt": "2024-10-14T10:05:07.000Z"

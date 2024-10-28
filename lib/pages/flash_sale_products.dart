@@ -17,7 +17,7 @@ class _FlashSaleProductsState extends ConsumerState<FlashSaleProducts> {
     final products = ref.watch(productsProvider);
     final favorites = ref.watch(favoritesProvider);
     var size = MediaQuery.of(context).size;
-    var childAspectRatio = size.width / (size.height * 0.68);
+    var childAspectRatio = size.width / (size.height * 0.75);
 
     return Scaffold(
       appBar: AppBar(

@@ -51,7 +51,7 @@ class _ProductsListState extends ConsumerState<ProductsList> {
     final products = ref.watch(productsProvider);
     final favorites = ref.watch(favoritesProvider);
     var size = MediaQuery.of(context).size;
-    var childAspectRatio = size.width / (size.height * 0.68);
+    var childAspectRatio = size.width / (size.height * 0.75);
 
     return Column(
       children: [

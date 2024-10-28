@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practice/providers/global_state.dart';
 import 'package:practice/widgets/cart_btn.dart';
 import 'package:practice/widgets/circular_icon_btn.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductDetailPage extends ConsumerStatefulWidget {
   final Map<String, dynamic> product;
@@ -16,13 +17,14 @@ class ProductDetailPage extends ConsumerStatefulWidget {
 class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
   
   late int selectedImageIndex = 0;
-  
+  late bool isImageLoading;
   initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    isImageLoading = true;
     final favorites = ref.watch(favoritesProvider);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -84,7 +86,19 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
                   width: double.infinity,
                   child: Image.network(
                     widget.product['images'][selectedImageIndex],
-                    fit: BoxFit.contain, // Center the image and prevent cut off
+                    fit: BoxFit.contain, 
+                    loadingBuilder: (context, child, loadingProgress) {
+                     if (loadingProgress == null) {
+                            return child;
+                    }
+                    return  Center(child: Container(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(
+                        color: Colors.black
+                      ),
+                    ),);
+                    },
                   ),
                 ),
               ),
@@ -93,7 +107,7 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
             widget.product['images'].length > 1 ? productImagesList(): Container(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-              child: Column(
+              child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Product details in the second half
